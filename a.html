@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Hobbies & Interests</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            overflow-x: hidden;
+        }
+
+        .aizen {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(15, 52, 96, 0.95) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .aizen::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: drift 20s linear infinite;
+        }
+
+        @keyframes drift {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .aizen-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .aizen h1 {
+            font-size: 3.5rem;
+            color: white;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInDown 1s ease;
+        }
+
+        .aizen p {
+            font-size: 1.3rem;
+            color: rgba(255,255,255,0.95);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            background: white;
+        }
+
+        .hobbies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .hobby-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .hobby-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .hobby-image {
+            width: 100%;
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hobby-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.3) 100%);
+        }
+
+        .cricket { background-image: url('https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=800'); }
+        .reading { background-image: url('https://images.unsplash.com/photo-1512820790803-83ca734da794?w=800'); }
+        .anime { background-image: url('https://images.unsplash.com/photo-1578632292335-df3abbb0d586?w=800'); }
+        .movies { background-image: url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800'); }
+        .webseries { background-image: url('https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?w=800'); }
+        .anime-watch { background-image: url('https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=800'); }
+
+        .hobby-content {
+            padding: 2rem;
+        }
+
+        .hobby-content h2 {
+            font-size: 1.8rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hobby-content h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .hobby-content p {
+            color: #666;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            margin-right: 0.5rem;
+        }
+
+        footer {
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        footer h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        footer p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: white;
+            color: #667eea;
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .aizen h1 {
+                font-size: 2.5rem;
+            }
+
+            .aizen p {
+                font-size: 1.1rem;
+            }
+
+            .hobbies-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .hobby-content h2 {
+                font-size: 1.5rem;
+            }
+
+            .container {
+                padding: 2rem 1rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .aizen h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="aizen">
+        <div class="aizen-content">
+            <h1>My Hobbies & Interests</h1>
+            <p>Welcome to my world of passion and creativity! I'm someone who believes life is too short not to explore the things that bring joy and excitement. From the thrill of cricket to the immersive worlds of anime, I dive deep into everything I love. Let me share what makes my heart beat faster!</p>
+        </div>
+        <div class="scroll-indicator">↓</div>
+    </section>
+
+    <div class="container">
+        <div class="hobbies-grid">
+            <div class="hobby-card">
+                <div class="hobby-image cricket"></div>
+                <div class="hobby-content">
+                    <h2>Cricket</h2>
+                    <p>Cricket isn't just a sport for me, it's a way of life! Whether I'm playing with friends on a sunny afternoon or watching my favorite teams battle it out, the excitement never fades. I follow international cricket religiously and love analyzing strategies, player performances, and those nail-biting finishes that keep you on the edge of your seat.</p>
+                    <span class="tag">Test Matches</span>
+                    <span class="tag">T20</span>
+                    <span class="tag">IPL Fan</span>
+                </div>
+            </div>
+
+            <div class="hobby-card">
+                <div class="hobby-image reading"></div>
+                <div class="hobby-content">
+                    <h2>Reading</h2>
+                    <p>Books are my gateway to infinite worlds and perspectives. I'm passionate about fiction, especially fantasy and science fiction, where imagination knows no bounds. From epic sagas to thought-provoking contemporary novels, I love getting lost in well-crafted stories. There's nothing quite like the smell of a new book and the anticipation of diving into a fresh adventure.</p>
+                    <span class="tag">Fantasy</span>
+                    <span class="tag">Sci-Fi</span>
+                    <span class="tag">Mystery</span>
+                </div>
+            </div>
+
+            <div class="hobby-card">
+                <div class="hobby-image anime"></div>
+                <div class="hobby-content">
+                    <h2>Anime & Manga</h2>
+                    <p>Anime and manga have captured my heart with their unique storytelling and stunning artistry. I'm drawn to shonen adventures, psychological thrillers, and slice-of-life stories that offer both escapism and profound life lessons. The medium's ability to tackle complex themes while delivering breathtaking visuals and memorable characters keeps me coming back for more.</p>
+                    <span class="tag">Shonen</span>
+                    <span class="tag">Seinen</span>
+                    <span class="tag">Manga Reader</span>
+                </div>
+            </div>
+
+            <div class="hobby-card">
+                <div class="hobby-image movies"></div>
+                <div class="hobby-content">
+                    <h2>Watching Movies</h2>
+                    <p>Cinema is my favorite art form. I appreciate everything from blockbuster action films to indie dramas that make you think long after the credits roll. Whether it's the latest Marvel spectacular or a critically acclaimed masterpiece, I love analyzing cinematography, storytelling techniques, and performances that leave a lasting impact.</p>
+                    <span class="tag">Action</span>
+                    <span class="tag">Drama</span>
+                    <span class="tag">Thriller</span>
+                </div>
+            </div>
+
+            <div class="hobby-card">
+                <div class="hobby-image webseries"></div>
+                <div class="hobby-content">
+                    <h2>Web Series</h2>
+                    <p>The golden age of streaming has given us incredible web series that rival traditional cinema. I'm hooked on shows that offer complex narratives, character development, and production quality that keeps improving. From Netflix originals to Amazon Prime gems, I love binge-watching series that push creative boundaries and tell stories in innovative ways.</p>
+                    <span class="tag">Netflix</span>
+                    <span class="tag">Amazon Prime</span>
+                    <span class="tag">Binge Watcher</span>
+                </div>
+            </div>
+
+            <div class="hobby-card">
+                <div class="hobby-image anime-watch"></div>
+                <div class="hobby-content">
+                    <h2>Anime Watching</h2>
+                    <p>Beyond just reading manga, watching anime is a separate passion. The animation quality, voice acting, and musical scores bring stories to life in ways that text alone cannot. I follow seasonal anime religiously, participate in discussions with fellow fans, and love discovering hidden gems that don't get mainstream attention. Each season brings new adventures to experience!</p>
+                    <span class="tag">Seasonal Anime</span>
+                    <span class="tag">Crunchyroll</span>
+                    <span class="tag">Community</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <h3>Keep Exploring Your Passions!</h3>
+        <p>Life is an adventure, and hobbies make the journey worthwhile. Never stop discovering what makes you happy!</p>
+        <div class="social-links">
+            <a href="#" title="Twitter">𝕏</a>
+            <a href="#" title="Instagram">📷</a>
+            <a href="#" title="Email">✉️</a>
+            <a href="#" title="GitHub">💻</a>
+        </div>
+        <p style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.7;">© 2024 My Hobbies & Interests | Made with passion ❤️</p>
+    </footer>
+</body>
+</html>
